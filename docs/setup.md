@@ -9,6 +9,12 @@ rm -rf /usr/local/go && tar -C /usr/local -xzf go1.25.7.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 go version
 
+# Go
+export GOROOT=/usr/local/go
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
 # Compile and install the application
 go build -o build/ ./cmd/cron
 go build -o build/ ./cmd/main
