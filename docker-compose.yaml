@@ -1,0 +1,15 @@
+services:
+
+  main:
+    image: golang-standard:1.25-bookworm
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Bangkok
+      APP_BASE_PATH: /app
+      LD_LIBRARY_PATH: /opt/oracle/instantclient_21_20
+      PATH: /opt/oracle/instantclient_21_20:$PATH
+    volumes:
+      - ./:/app
+      - /mnt:/mnt
+      - /opt/oracle/instantclient_21_20:/opt/oracle/instantclient_21_20
+    command: ./build/cron --run-now */5 * * * * * ./build/main
