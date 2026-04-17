@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"project/module/cmd/gonic/controllers/get_data"
 	"project/module/cmd/gonic/controllers/template_delete_body_controller"
 	"project/module/cmd/gonic/controllers/template_delete_parameter_controller"
 	"project/module/cmd/gonic/controllers/template_get_controller"
@@ -51,6 +52,8 @@ func main() {
 	router.POST("/template/parameter", template_post_parameter_controller.Handle)
 	router.PUT("/template/body", template_put_body_controller.Handle)
 	router.PUT("/template/parameter", template_put_parameter_controller.Handle)
+
+	router.GET("/data", get_data.Handle)
 
 	router.Run()
 	slog.Info("END")
