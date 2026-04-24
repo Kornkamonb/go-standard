@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"time"
 
 	// "project/module/cmd/gonic/controllers/get_data"
 	"project/module/cmd/gonic/controllers/template_delete_body_controller"
@@ -36,16 +37,30 @@ func main() {
 	tmpPath := filepath.Join(appBasePath, "tmp")
 
 	router := gin.Default()
+
+router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:5173"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Accept"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
+
+
 	info.RegisterRoutes(router,db)
 	router.MaxMultipartMemory = math.MaxInt64
 
 	router.Use(cors.Default())
+
+
 
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "pong",
 		})
 	})
+
+
 
 	router.Static("/static", staticPath)
 	router.Static("/tmp", tmpPath)

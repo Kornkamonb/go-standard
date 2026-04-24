@@ -8,7 +8,15 @@ import (
 type JobService struct{}
 
 func (s *JobService) GetTable() model.Response {
-	return model.Response{Status: "OK", Data: "table data"}
+	return model.Response{Status: "OK", Data: "Tabledata"}
+}
+
+func (s *JobService) GetCardData() model.Response {
+	return model.Response{Status: "OK", Data: "Carddata"}
+}
+
+func (s *JobService) GetExportData() model.Response {
+	return model.Response{Status: "OK", Data: "Carddata"}
 }
 
 func (s *JobService) CreateJob(dto model.CreateJobDTO) model.Response {

@@ -16,10 +16,18 @@ func NewHandler(db *pgxpool.Pool) *Handler {
 	return &Handler{DB: db}
 }
 
-func (h *Handler) Handle(c *gin.Context) {
+func (h *Handler) GetTableData(c *gin.Context) {
 	repo := repository.JobRepository{DB: h.DB}
 
 	result := repo.GetTable()
+
+	c.JSON(http.StatusOK, result)
+}
+
+func (h *Handler) GetCardData(c *gin.Context) {
+	repo := repository.JobRepository{DB: h.DB}
+
+	result := repo.GetCardData()
 
 	c.JSON(http.StatusOK, result)
 }
